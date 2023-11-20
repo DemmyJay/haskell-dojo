@@ -5,7 +5,7 @@ import TTT.A1
 import TTT.A2
 
 -- Q#01
-
+showInts :: Player
 showInts = undefined
 
 _HEADER_ = undefined
