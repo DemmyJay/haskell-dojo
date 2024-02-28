@@ -65,7 +65,7 @@ type Line   = [Square]
 type Board  = [Row]
 type Move   = (Int,Int)
 
--- Q#
+-- Q#09
 
 getFirstPlayer :: Bool -> Player
 getFirstPlayer p = if p then X else O

@@ -33,4 +33,13 @@ alwaysBlue :: Bool -> [Colour] -> Bool
 alwaysBlue _ (s:xs) = s == Blue || alwaysBlue True xs
 alwaysBlue bool [] = bool
 
+countDown :: Int -> String
+countDown 0 = "Liftoff!" 
+countDown n =
+    if n > 0
+    then countDown (n - 1)     
+    else "Failure to Launch"
+
+
+
 
