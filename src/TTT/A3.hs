@@ -5,18 +5,23 @@ import TTT.A1
 import TTT.A2
 
 -- Q#01
-showInts :: Player
-showInts = undefined
+showInts :: [Int] -> [String]
+showInts [] = []
+showInts (x : xs) =  show x : showInts xs
 
-_HEADER_ = undefined
+_HEADER_ :: String
+_HEADER_ = ' ' : formatLine (showInts _RANGE_)
 
 -- Q#02
 
-showSquares = undefined
+showSquares :: Row -> [String]
+showSquares [] = []
+showSquares (x : xs) = show x : showSquares xs 
 
 -- Q#03
 
-formatRows = undefined
+formatRows :: Board -> [String]
+formatRows xs = map (formatLine . showSquares) xs
 
 -- Q#04
 

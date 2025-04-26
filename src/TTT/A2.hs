@@ -2,14 +2,14 @@ module TTT.A2 where
 
 import Data.List (intercalate)
 import TTT.A1
-
+ 
 -- Q#01
 
 promptPlayer :: Player -> String
-promptPlayer p = "Player " ++ show p ++ "'s turn: enter a row and column position (ex. A1)"
+promptPlayer p = "Player " ++ show p ++ "'s turn: enter a row and column position (exp. A1)"
 
 promptPlayer' :: Player -> String
-promptPlayer' p = concat ["Player ", show p, "'s turn: enter a row and column position (ex"]
+promptPlayer' p = concat ["Player ", show p, "'s turn: enter a row and column position (exp. A1)"]
 
 -- Q#02
 
@@ -26,11 +26,11 @@ readDigit x
    | otherwise = -1
 
 -- Q#04
-
-_EMPTY_ROW_ :: [Square]
+ 
+_EMPTY_ROW_ :: Row
 _EMPTY_ROW_ = replicate _SIZE_ Empty
 
-_EMPTY_BOARD_ :: [[Square]]
+_EMPTY_BOARD_ :: Board
 _EMPTY_BOARD_ = replicate _SIZE_ _EMPTY_ROW_
 
 -- Q#05
@@ -52,15 +52,17 @@ isTied b
 indexRowStrings :: [String] -> [(Char, String)]
 indexRowStrings xs = zip ['A'..] xs
 
--- or
+{-
+WRONG:
 
 indexRowStrings' :: [String] -> [(Char, String)]
-indexRowStrings' xs = [(x,y) | x <- ['A'..], y <- xs]
+indexRowStrings' xs = [(x,y) | x <- ['A'.. (toEnum (64 + (length xs)))], y <- xs]
+-}
 
 -- Q#07
 
 formatLine :: [String] -> String
-formatLine xs = intercalate _SEP_ xs
+formatLine xs = _SEP_ ++ intercalate _SEP_ xs ++ _SEP_
 
 -- Q#08
 
@@ -70,16 +72,19 @@ isMoveInBounds (x, y) =
        check' = y >= 0 && y <= 2
    in check && check'
 
+   --or
+
 isMoveInBounds' :: Move -> Bool
 isMoveInBounds' (x, y) = (x >= 0 && x <= 2) && (y >= 0 && y <= 2)
 
 -- Q#09
-
+-- incomplete: constrain each Char in the string to valid moves
 stringToMove :: String -> Move
 stringToMove []        = _INVALID_MOVE_
 stringToMove [_]       = _INVALID_MOVE_
 stringToMove (_:_:_:_) = _INVALID_MOVE_
-stringToMove [x, y] = (convertRowIndex x , readDigit y) 
+stringToMove [x, y] =   (convertRowIndex x , readDigit y) 
+
 
 -- Q#10
 
@@ -89,7 +94,10 @@ rsX = replaceSquareInRow X
 rsO :: Int -> Row -> Row
 rsO = replaceSquareInRow O 
 
+e :: Row
 e = head _EMPTY_BOARD_ 
+
+t :: Row
 t = last _TIED_BOARD_
 
 replaceSquareInRow :: Player -> Int -> Row -> Row

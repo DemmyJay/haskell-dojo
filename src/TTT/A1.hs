@@ -15,14 +15,13 @@ convertRowIndex :: Char -> Int
 convertRowIndex a = fromEnum (toUpper a) - 65
 
 -- Q#04
-
 _INVALID_MOVE_ :: (Int,Int)
 _INVALID_MOVE_ = (-1,-1)
 
 -- Q#05
 
 _SEP_ :: [Char]
-_SEP_ = " | "
+_SEP_ = "_|_"
 
 -- Q#06
 
@@ -53,7 +52,6 @@ instance Eq Square where
     O     /= X     = True
 -}
 
-
 -- Q#07
 
 data GameState = InProgress | XWins | OWins | Tie deriving Show
@@ -65,18 +63,18 @@ type Line   = [Square]
 type Board  = [Row]
 type Move   = (Int,Int)
 
+
 -- Q#09
 
 getFirstPlayer :: Bool -> Player
 getFirstPlayer p = if p then X else O
-
+--or
 getFirstPlayer_ :: Bool -> Player
 getFirstPlayer_ p
     | p         = X
     | otherwise = O
 
 -- Q#10
-
 showGameState :: GameState -> String
 showGameState gs = case gs of
     InProgress -> "Game is in progress"
@@ -85,14 +83,12 @@ showGameState gs = case gs of
     Tie        -> "It's a tie!"
 
 -- Q#11
-
 switchPlayer :: Player -> Player
 switchPlayer X     = O
 switchPlayer O     = X
 switchPlayer Empty = Empty
 
 -- Q#12
-
 showSquare :: Square -> String
 showSquare X     = "X"
 showSquare O     = "O"
